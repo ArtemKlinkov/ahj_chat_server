@@ -57,9 +57,9 @@ const wsServer = new WS.Server({ server });
 
 const clients = [];
 
-router.get("/index", async (ctx, next) => {
-  console.log("get index");
-});
+// router.get("/index", async (ctx, next) => {
+//   console.log("get index");
+// });
 
 router.get("/users", async (ctx, next) => {
   console.log("get users");
@@ -68,7 +68,7 @@ router.get("/users", async (ctx, next) => {
 
 router.post("/users", async (ctx, next) => {
   clients.push({ ...ctx.request.body, id: uuid.v4() });
-  ctx.response.status = 204;
+  ctx.response.status = 200;
 });
 
 router.delete("/users/:name", async (ctx, next) => {
@@ -77,7 +77,7 @@ router.delete("/users/:name", async (ctx, next) => {
   if (index !== -1) {
     clients.splice(index, 1);
   }
-  ctx.response.status = 204;
+  ctx.response.status = 200;
 });
 
 wsServer.on("connection", (ws, req) => {
